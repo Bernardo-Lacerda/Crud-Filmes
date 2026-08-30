@@ -1,10 +1,10 @@
 <?php
 
-require __DIR__ . '/config/db.php';
+require __DIR__ . '/includes/auth.php';
+require __DIR__ . '/includes/header.php';
+?>
 
-$stmt = $pdo->query('SELECT * FROM generos');
-$generos = $stmt->fetchAll();
+<h1 class="h3 mb-3">Bem-vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?></h1>
+<p>Use o menu acima para gerenciar filmes e generos.</p>
 
-foreach ($generos as $genero) {
-    echo $genero['genero'] . '<br>';
-}
+<?php require __DIR__ . '/includes/footer.php'; ?>
