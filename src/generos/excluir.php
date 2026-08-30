@@ -15,5 +15,5 @@ if ($id !== '') {
     }
 }
 
-header('Location: /generos/listar.php');
+header('Location: /generos/listar.php?sucesso=excluido');
 exit;

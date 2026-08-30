@@ -16,6 +16,11 @@ $plataformas = [
 $mensagensErro = [
     'vazio' => 'Preencha todos os campos obrigatorios corretamente.',
 ];
+
+$mensagensSucesso = [
+    'salvo' => 'Filme salvo com sucesso.',
+    'excluido' => 'Filme excluido com sucesso.',
+];
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -27,6 +32,13 @@ $mensagensErro = [
 <div class="alert alert-danger"><?= htmlspecialchars($mensagensErro[$_GET['erro']]) ?></div>
 <?php endif; ?>
 
+<?php if (isset($_GET['sucesso']) && isset($mensagensSucesso[$_GET['sucesso']])): ?>
+<div class="alert alert-success"><?= htmlspecialchars($mensagensSucesso[$_GET['sucesso']]) ?></div>
+<?php endif; ?>
+
+<?php if (count($filmes) === 0): ?>
+<p class="text-muted">Nenhum filme cadastrado ainda.</p>
+<?php else: ?>
 <table class="table table-striped bg-white">
     <thead>
         <tr>
@@ -56,5 +68,6 @@ $mensagensErro = [
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php endif; ?>
 
 <?php require __DIR__ . '/../includes/footer.php'; ?>

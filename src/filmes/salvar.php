@@ -28,5 +28,5 @@ if ($id !== '') {
     $stmt->execute([$titulo, $diretor, $genero_id, $duracao_minutos, $ano_lancamento, $plataforma]);
 }
 
-header('Location: /filmes/listar.php');
+header('Location: /filmes/listar.php?sucesso=salvo');
 exit;

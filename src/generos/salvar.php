@@ -24,5 +24,5 @@ try {
     exit;
 }
 
-header('Location: /generos/listar.php');
+header('Location: /generos/listar.php?sucesso=salvo');
 exit;

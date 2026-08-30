@@ -10,5 +10,5 @@ if ($id !== '') {
     $stmt->execute([$id]);
 }
 
-header('Location: /filmes/listar.php');
+header('Location: /filmes/listar.php?sucesso=excluido');
 exit;
