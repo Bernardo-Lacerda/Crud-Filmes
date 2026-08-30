@@ -12,12 +12,20 @@ $plataformas = [
     'cinema' => 'Cinema',
     'ambos' => 'Cinema + Streaming',
 ];
+
+$mensagensErro = [
+    'vazio' => 'Preencha todos os campos obrigatorios corretamente.',
+];
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="h3">Filmes</h1>
     <a href="/filmes/form.php" class="btn btn-primary">Novo Filme</a>
 </div>
+
+<?php if (isset($_GET['erro']) && isset($mensagensErro[$_GET['erro']])): ?>
+<div class="alert alert-danger"><?= htmlspecialchars($mensagensErro[$_GET['erro']]) ?></div>
+<?php endif; ?>
 
 <table class="table table-striped bg-white">
     <thead>

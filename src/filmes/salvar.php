@@ -15,14 +15,17 @@ $camposValidos = $titulo !== '' && $diretor !== '' && $genero_id !== ''
     && $duracao_minutos !== '' && $ano_lancamento !== ''
     && in_array($plataforma, ['streaming', 'cinema', 'ambos'], true);
 
-if ($camposValidos) {
-    if ($id !== '') {
-        $stmt = $pdo->prepare('UPDATE filmes SET titulo = ?, diretor = ?, genero_id = ?, duracao_minutos = ?, ano_lancamento = ?, plataforma = ? WHERE id = ?');
-        $stmt->execute([$titulo, $diretor, $genero_id, $duracao_minutos, $ano_lancamento, $plataforma, $id]);
-    } else {
-        $stmt = $pdo->prepare('INSERT INTO filmes (titulo, diretor, genero_id, duracao_minutos, ano_lancamento, plataforma) VALUES (?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$titulo, $diretor, $genero_id, $duracao_minutos, $ano_lancamento, $plataforma]);
-    }
+if (!$camposValidos) {
+    header('Location: /filmes/listar.php?erro=vazio');
+    exit;
+}
+
+if ($id !== '') {
+    $stmt = $pdo->prepare('UPDATE filmes SET titulo = ?, diretor = ?, genero_id = ?, duracao_minutos = ?, ano_lancamento = ?, plataforma = ? WHERE id = ?');
+    $stmt->execute([$titulo, $diretor, $genero_id, $duracao_minutos, $ano_lancamento, $plataforma, $id]);
+} else {
+    $stmt = $pdo->prepare('INSERT INTO filmes (titulo, diretor, genero_id, duracao_minutos, ano_lancamento, plataforma) VALUES (?, ?, ?, ?, ?, ?)');
+    $stmt->execute([$titulo, $diretor, $genero_id, $duracao_minutos, $ano_lancamento, $plataforma]);
 }
 
 header('Location: /filmes/listar.php');

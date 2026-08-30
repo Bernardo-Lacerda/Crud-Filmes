@@ -6,6 +6,12 @@ require __DIR__ . '/../includes/header.php';
 
 $stmt = $pdo->query('SELECT * FROM generos ORDER BY genero');
 $generos = $stmt->fetchAll();
+
+$mensagensErro = [
+    'uso' => 'Nao e possivel excluir este genero porque ha filmes cadastrados com ele.',
+    'vazio' => 'O campo genero e obrigatorio.',
+    'duplicado' => 'Ja existe um genero com esse nome.',
+];
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -13,8 +19,8 @@ $generos = $stmt->fetchAll();
     <a href="/generos/form.php" class="btn btn-primary">Novo Genero</a>
 </div>
 
-<?php if (isset($_GET['erro']) && $_GET['erro'] === 'uso'): ?>
-<div class="alert alert-danger">Nao e possivel excluir este genero porque ha filmes cadastrados com ele.</div>
+<?php if (isset($_GET['erro']) && isset($mensagensErro[$_GET['erro']])): ?>
+<div class="alert alert-danger"><?= htmlspecialchars($mensagensErro[$_GET['erro']]) ?></div>
 <?php endif; ?>
 
 <table class="table table-striped bg-white">
